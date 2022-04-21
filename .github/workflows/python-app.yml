@@ -53,6 +53,7 @@ jobs:
 
   CI:
     needs: [ tests ]
+    runs-on: ubuntu-latest
     steps:
       - name: Create ZIP deployment package
         run: zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git*
