@@ -7,7 +7,7 @@ env:
   EB_APPLICATION_NAME: "020_flask"
   EB_ENVIRONMENT_NAME: "020flask-env"
   VERSION_SHA: ${{ github.sha }}
-  DEPLOY_PACKAGE_NAME: "020_flask_app_${{ env.VERSION_SHA }}.zip"
+  DEPLOY_PACKAGE_NAME: "020_flask_app_${{ github.sha }}.zip"
   AWS_REGION_NAME: "eu-central-1"
   AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
   AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
