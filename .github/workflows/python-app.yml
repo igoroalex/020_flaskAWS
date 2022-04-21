@@ -8,6 +8,8 @@ env:
   EB_ENVIRONMENT_NAME: "020flask-env"
   DEPLOY_PACKAGE_NAME: "020_flask_app_${{ github.sha }}.zip"
   AWS_REGION_NAME: "eu-central-1"
+  AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY }}
+  AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
 
 on:
   push:
@@ -51,16 +53,11 @@ jobs:
       - name: Create ZIP deployment package
         run: zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git*
 
-      - run: echo "11111111111111111111"
-      - run: echo ${{ secrets.AWS_ACCESS_KEY }}
-      - run: echo ${{ secrets.AWS_SECRET_KEY }}
-      - run: echo ${{ env.AWS_REGION_NAME }}
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-access-key-id: ${{ env.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ env.AWS_SECRET_KEY }}
           aws-region: ${{ env.AWS_REGION_NAME }}
 
       - name: Copy Deployment package to S3 bucket
