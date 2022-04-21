@@ -5,8 +5,8 @@ from app.main import create_app
 
 from config import settings
 
-app = create_app()
+application = create_app()
 
 if __name__ == "__main__":
-    app.run()
+    application.run()
     # app.run(debug=settings.DEBUG, port=settings.PORT, host=settings.HOST)
