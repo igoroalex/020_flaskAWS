@@ -23,7 +23,7 @@ permissions:
   contents: read
 
 jobs:
-  ci:
+  tests:
 
     runs-on: ubuntu-latest
 
@@ -51,6 +51,9 @@ jobs:
       #        run: |
       #          pytest
 
+  CI:
+    needs: [ tests ]
+    steps:
       - name: Create ZIP deployment package
         run: zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git*
 
@@ -67,10 +70,10 @@ jobs:
       - name: CI Happy massege
         run: echo "CI Pipeline part finished"
 
-  cp:
+  CD:
 
+    needs: [ CI ]
     runs-on: ubuntu-latest
-    needs: [ ci ]
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
