@@ -47,11 +47,11 @@ jobs:
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      #      - name: Test with pytest
-      #        run: |
-      #          pytest
+      - name: Test with pytest
+      run: |
+         pytest
 
-  CI:
+  build_CI:
     needs: [ tests ]
 
     runs-on: ubuntu-latest
@@ -76,9 +76,9 @@ jobs:
       - name: CI Happy massege
         run: echo "CI Pipeline part finished"
 
-  CD:
+  deploy_CD:
 
-    needs: [ CI ]
+    needs: [ build_CI ]
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS credentials
@@ -99,7 +99,7 @@ jobs:
           aws elasticbeanstalk update-environment \
           --environment-name ${{ env.EB_ENVIRONMENT_NAME }} \
           --version-label "ver-${{ env.VERSION_SHA }}"
-        
+
       - name: CD Happy massege
         run: echo "CD Pipeline part finished"
 
