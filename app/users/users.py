@@ -10,4 +10,4 @@ bp = Blueprint(
 
 @bp.route("/")
 def get_html_index():
-    return "<p>Hello, World 21 !</p>"
+    return "<p>Hello, World 22 !</p>"
