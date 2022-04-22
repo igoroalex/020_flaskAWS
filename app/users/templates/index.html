@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Edamama!</title>
+</head>
+<body>
+<h1>Edamama!</h1>
+<form class="row g-3 needs-validation" method="post" novalidate>
+    <div class="col-md-1">
+        <label for="sexCustom" class="form-label">Sex</label>
+        <select class="form-select" id="sexCustom" name="sexCustom" value="{{ calculate.sex }}" required>
+            <option selected disabled value="">Choose...</option>
+            <option value="male">male</option>
+            <option value="female">female</option>
+        </select>
+        <div class="invalid-feedback">
+            Please select a valid state.
+        </div>
+    </div>
+    <div class="col-md-1">
+        <label for="massCustom" class="form-label">Mass, kg</label>
+        <input type="text" class="form-control" id="massCustom" name="massCustom" value="{{ calculate.mass }}" required>
+        <div class="invalid-feedback">
+            Please provide mass (kg).
+        </div>
+    </div>
+    <div class="col-md-1">
+        <label for="heightCustom" class="form-label">Height, cm</label>
+        <input type="text" class="form-control" id="heightCustom" name="heightCustom" value="{{ calculate.height }}"
+               required>
+        <div class="invalid-feedback">
+            Please provide Height (cm).
+        </div>
+    </div>
+    <div class="col-md-1">
+        <label for="ageCustom" class="form-label">Age, years</label>
+        <input type="text" class="form-control" id="ageCustom" name="ageCustom" value="{{ calculate.age }}"
+               required>
+        <div class="invalid-feedback">
+            Please provide age (years).
+        </div>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Calculate</button>
+    </div>
+    <div class="col-md-1">
+        <label for="heatproductionCustom" class="form-label">Heat production</label>
+        <input type="text" readonly class="form-control" id="heatproductionCustom" name="heatproductionCustom"
+               value="{{ calculate.heat_production() }}"
+               required>
+        <div class="invalid-feedback">
+            Please provide age (years).
+        </div>
+    </div>
+    <div class="col-md-1">
+        <label for="productCustom" class="form-label">Product</label>
+        <input type="text" class="form-control" id="productCustom" name="productCustom" required>
+        <div class="invalid-feedback">
+            Please provide mass (kg).
+        </div>
+    </div>
+    <div class="col-md-1">
+        <label for="productmassCustom" class="form-label">gram</label>
+        <input type="text" class="form-control" id="productmassCustom" name="productmassCustom" value="100" required>
+        <div class="invalid-feedback">
+            Please provide mass (kg).
+        </div>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Eat yummy</button>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product</th>
+            <th scope="col">Enerc KCal</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in daily_products %}
+        <tr>
+            <th scope="row"></th>
+            <td>{{ product.product }}</td>
+            <td>{{ product.enerc_kcal }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</form>
+</body>
+</html>

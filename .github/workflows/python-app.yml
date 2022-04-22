@@ -60,6 +60,12 @@ jobs:
       - name: Git clone repo
         uses: actions/checkout@v3
 
+      - name: Create .env
+        run: |
+          touch .env
+          echo EDAMAM_APP_ID=${{ secrets.EDAMAM_APP_ID }} >> .env
+          echo EDAMAM_APP_KEY=${{ secrets.EDAMAM_APP_KEY }} >> .env
+
       - name: Create ZIP deployment package
         run: zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git*
 
